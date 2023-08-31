@@ -44,6 +44,13 @@ class RandomArrayGenerator {
   getAllPermutations() {
     return this.permutations;
   }
+
+  erasePermutations() {
+    this.permutations = {}; // Reset the permutations to an empty object
+    this.permutationIndex = 1; // Reset the permutation index
+    this.randomArray = this.generateRandomArray(); // Generate a new initial random array
+    this.savePermutation(this.randomArray); // Save the new initial random array
+  }
 }
 
 const minNumber = 1;
