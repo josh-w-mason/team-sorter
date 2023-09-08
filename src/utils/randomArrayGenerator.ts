@@ -2,16 +2,16 @@ class RandomArrayGenerator {
   private min: number;
   private max: number;
   private count: number;
-  private permutationIndex: number;
-  private permutations: Record<number, number[]>;
+
+  private permutations: number[][];
   private randomArray: number[];
 
   constructor(min: number, max: number, count: number) {
     this.min = min;
     this.max = max;
     this.count = count;
-    this.permutationIndex = 1;
-    this.permutations = {};
+
+    this.permutations = [];
 
     this.randomArray = this.generateRandomArray();
     this.savePermutation(this.randomArray);
@@ -38,8 +38,7 @@ class RandomArrayGenerator {
   }
 
   savePermutation(array: number[]) {
-    this.permutations[this.permutationIndex] = array.slice();
-    this.permutationIndex++;
+    this.permutations.unshift(array.slice());
   }
 
   generateNextPermutation() {
@@ -52,8 +51,8 @@ class RandomArrayGenerator {
   }
 
   erasePermutations() {
-    this.permutations = {}; // Reset the permutations to an empty object
-    this.permutationIndex = 1; // Reset the permutation index
+    this.permutations = []; // Reset the permutations to an empty array
+
     this.randomArray = this.generateRandomArray(); // Generate a new initial random array
     this.savePermutation(this.randomArray); // Save the new initial random array
   }
@@ -63,7 +62,7 @@ const minNumber = 1;
 const maxNumber = 100;
 const count = 5; // Number of integers in the array
 
-const generator = new RandomArrayGenerator(minNumber, maxNumber, count);
+export const generator = new RandomArrayGenerator(minNumber, maxNumber, count);
 
 generator.generateNextPermutation();
 

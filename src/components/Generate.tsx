@@ -1,3 +1,5 @@
+import { generator } from "~/utils/randomArrayGenerator";
+
 export function Generate() {
   return (
     <div className="flex items-center justify-center">
@@ -17,4 +19,9 @@ function handleClick() {
   // look up object for active players
   //count how many there are
   //make an array of this length - 1
+
+  generator.generateNextPermutation();
+
+  const players = generator.getAllPermutations();
+  console.log(players[0]);
 }
