@@ -60,7 +60,7 @@ class RandomArrayGenerator {
 
 const minNumber = 1;
 const maxNumber = 100;
-const count = 4; // Number of integers in the array
+const count = 6; // Number of integers in the array
 
 export const generator = new RandomArrayGenerator(minNumber, maxNumber, count);
 

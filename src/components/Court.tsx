@@ -5,7 +5,7 @@ interface CourtProps {
 }
 
 export function Court({ playerData }: CourtProps) {
-  let playerNameData = ["Dan", "Dana", "Jeff", "Jess"];
+  let playerNameData = ["Dan", "Dana", "Jeff", "Jess", "Josh", "Jorf"];
   const [playerNames, setPlayerNames] = useState<string[]>([]);
 
   useEffect(() => {
@@ -18,8 +18,6 @@ export function Court({ playerData }: CourtProps) {
       setPlayerNames(mappedNames);
     }
   }, [playerData]);
-
-  console.log(playerNames);
 
   return (
     <div className="flex items-center justify-center">
