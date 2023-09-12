@@ -5,7 +5,7 @@ interface CourtProps {
 }
 
 export function Bench({ playerData }: CourtProps) {
-  let playerNameData = ["Dan", "Dana", "Jeff", "Jess", "Josh", "Jorf"];
+  const playerNameData = ["Dan", "Dana", "Jeff", "Jess", "Josh", "Jorf"];
   const [playerNames, setPlayerNames] = useState<string[]>([]);
 
   useEffect(() => {
@@ -15,7 +15,7 @@ export function Bench({ playerData }: CourtProps) {
 
       const lastTwoPlayerData = playerData.slice(-2);
       const mappedNames = lastTwoPlayerData.map(
-        (index) => playerNameData[index - 1] || ""
+        (index) => playerNameData[index - 1] ?? ""
       );
       setPlayerNames(mappedNames);
     }

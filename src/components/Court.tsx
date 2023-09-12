@@ -5,7 +5,17 @@ interface CourtProps {
 }
 
 export function Court({ playerData }: CourtProps) {
-  let playerNameData = ["Dan", "Dana", "Jeff", "Jess", "Josh", "Jorf"];
+  const playerNameData = [
+    "Dan",
+    "Dana",
+    "Jeff",
+    "Jess",
+    "Josh",
+    "Jorf",
+    "Tim",
+    "Tom",
+    "Term",
+  ];
   const [playerNames, setPlayerNames] = useState<string[]>([]);
 
   useEffect(() => {
@@ -13,7 +23,7 @@ export function Court({ playerData }: CourtProps) {
     if (playerData.length > 0) {
       // Map playerData to playerNames using the indices
       const mappedNames = playerData.map(
-        (index) => playerNameData[index - 1] || ""
+        (index) => playerNameData[index - 1] ?? ""
       );
       setPlayerNames(mappedNames);
     }
