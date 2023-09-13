@@ -5,7 +5,6 @@ import { Court } from "~/components/Court";
 import { api } from "~/utils/api";
 import { Generate } from "~/components/Generate";
 import { Bench } from "~/components/Bench";
-import { Settings } from "~/components/Settings";
 
 export default function Home() {
   const hello = api.example.hello.useQuery({ text: "from tRPC" });
@@ -24,8 +23,11 @@ export default function Home() {
       <Court playerData={playerData} />
 
       <Generate onDataGenerated={handleDataGenerated} />
-      <Settings />
+
       <Bench playerData={playerData} />
+      <Link href="/settings">
+        <a>Go to settings</a>
+      </Link>
       <main className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-[#2e026d] to-[#15162c]">
         <div className="container flex flex-col items-center justify-center gap-12 px-4 py-16 ">
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-8"></div>
