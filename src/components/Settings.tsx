@@ -1,7 +1,25 @@
 import React, { useState } from "react";
+import { players } from "~/utils/playerData";
+
+interface Person {
+  id: number;
+  name: string;
+  benched: boolean;
+  present: boolean;
+}
 
 export function Settings() {
   const [selectedOption, setSelectedOption] = useState("number of courts");
+  const [currentlyPresent, setPresent] = useState<Person[]>([]);
+
+  const handleCheckboxChange = (id: number) => {
+    console.log("checked!!");
+    setPresent((prevPeople) =>
+      prevPeople.map((person) =>
+        person.id === id ? { ...person, present: !person.present } : person
+      )
+    );
+  };
 
   return (
     <>
@@ -27,6 +45,22 @@ export function Settings() {
             Add
           </button>
         </form>
+        <div>
+          <h2>Who's here??</h2>
+        </div>
+        <div>
+          <ul>
+            {players.map((player) => (
+              <li key={player.id}>
+                {player.name}{" "}
+                <input
+                  type="checkbox"
+                  onChange={() => handleCheckboxChange(player.id)}
+                />
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     </>
   );
