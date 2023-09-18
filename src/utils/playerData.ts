@@ -3,13 +3,13 @@ export const players = [
     id: 1,
     name: "Josh",
     benched: true,
-    present: true,
+    present: false,
   },
   {
     id: 2,
     name: "Jeff",
     benched: false,
-    present: false,
+    present: true,
   },
   {
     id: 3,
