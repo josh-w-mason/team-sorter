@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { players } from "~/utils/playerData";
+import { useRouter } from "next/router";
 
 interface Person {
   id: number;
@@ -11,6 +12,7 @@ interface Person {
 export function Settings() {
   const [selectedOption, setSelectedOption] = useState("number of courts");
   const [currentlyPresent, setPresent] = useState<Person[]>([]);
+  const router = useRouter();
 
   useEffect(() => {
     // Initialize the currentlyPresent state with the data from playerData.ts
@@ -50,6 +52,13 @@ export function Settings() {
     }
   };
 
+  const handleLetsGoClick = async () => {
+    // Perform your functions here
+
+    // Redirect to a different page using the router
+    await router.push("/");
+  };
+
   return (
     <>
       <div>
@@ -60,6 +69,8 @@ export function Settings() {
           <option value="option1">1 Court</option>
           <option value="option2">2 Courts</option>
           <option value="option3">3 Courts</option>
+          <option value="option4">4 Courts</option>
+          <option value="option5">5 Courts</option>
         </select>
       </div>
       <div>
@@ -98,6 +109,10 @@ export function Settings() {
               </li>
             ))}
           </ul>
+        </div>
+        <div>
+          <br></br>
+          <button onClick={handleLetsGoClick}>Lets Go!</button>
         </div>
       </div>
     </>
