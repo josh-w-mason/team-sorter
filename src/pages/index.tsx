@@ -5,8 +5,29 @@ import { Court } from "~/components/Court";
 import { api } from "~/utils/api";
 import { Generate } from "~/components/Generate";
 import { Bench } from "~/components/Bench";
+import { getLocalData } from "../../lib/localdata";
+import { type GetStaticProps } from "next";
 
-export default function Home() {
+interface Person {
+  id: number;
+  name: string;
+  benched: boolean;
+  present: boolean;
+}
+
+interface LocalData {
+  localData: Person[];
+}
+
+export const getStaticProps: GetStaticProps<LocalData> = async () => {
+  const localData: Person[] = (await getLocalData()) as Person[];
+
+  return {
+    props: { localData },
+  };
+};
+
+export default function Home({ localData }: LocalData) {
   const hello = api.example.hello.useQuery({ text: "from tRPC" });
   const [playerData, setPlayerData] = useState<number[]>([]);
   const handleDataGenerated = (data: number[] | undefined) => {
@@ -29,6 +50,18 @@ export default function Home() {
       <main className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-[#2e026d] to-[#15162c]">
         <div className="container flex flex-col items-center justify-center gap-12 px-4 py-16 ">
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-8"></div>
+          <ul>
+            {localData.map(({ id, name }) => (
+              <li key={id}>
+                <b>
+                  {id} - {name}
+                </b>
+
+                <br />
+              </li>
+            ))}
+          </ul>
+
           <div className="flex flex-col items-center gap-2"></div>
         </div>
       </main>
