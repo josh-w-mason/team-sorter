@@ -2,11 +2,46 @@ import React, { useState, useEffect } from "react";
 import { players } from "~/utils/playerData";
 import { useRouter } from "next/router";
 
+const fs = require("fs");
+
 interface Person {
   id: number;
   name: string;
   benched: boolean;
   present: boolean;
+}
+
+const dataFilePath = "/src/utils/playerData.ts";
+
+const newData = [
+  ...players,
+  {
+    id: 10,
+    name: "New Player",
+    benched: false,
+    present: true,
+  },
+];
+
+const fileContent = `export const players = ${JSON.stringify(
+  newData,
+  null,
+  2
+)};\n`;
+
+fs.writeFileSync(dataFilePath, fileContent, "utf-8");
+
+// Check if the file exists
+if (fs.existsSync(dataFilePath)) {
+  // Read the file content and compare it
+  const updatedContent = fs.readFileSync(dataFilePath, "utf-8");
+  if (updatedContent === fileContent) {
+    console.log("File updated successfully");
+  } else {
+    console.error("File content mismatch after update");
+  }
+} else {
+  console.error("File does not exist after update");
 }
 
 export function Settings() {
