@@ -94,6 +94,22 @@ export function Settings() {
     await router.push("/");
   };
 
+  ///---------try using Next API and fs to write to JSON file:
+
+  const saveData = async () => {
+    const response = await fetch("/api/storeJSONData", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ name: "Lorenzo", email: "lo@lorenzozar.com" }),
+    });
+    const data = await response.json();
+    console.log(data);
+  };
+
+  //-----------------
+
   return (
     <>
       <div>

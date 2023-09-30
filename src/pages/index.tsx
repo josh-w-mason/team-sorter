@@ -34,6 +34,18 @@ export default function Home({ localData }: LocalData) {
     setPlayerData(data);
   };
 
+  //testing Next API stuff
+
+  type JSONData = Person[];
+
+  const fetchData = async () => {
+    const response = await fetch("/api/storeJSONData");
+    const data = (await response.json()) as JSONData;
+    console.log(data);
+  };
+
+  //--------------------------------------
+
   return (
     <>
       <Head>
@@ -62,7 +74,9 @@ export default function Home({ localData }: LocalData) {
             ))}
           </ul>
 
-          <div className="flex flex-col items-center gap-2"></div>
+          <div className="flex flex-col items-center gap-2">
+            <button onClick={fetchData}>Fetch</button>
+          </div>
         </div>
       </main>
     </>
