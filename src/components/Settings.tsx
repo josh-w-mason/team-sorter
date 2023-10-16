@@ -11,21 +11,21 @@ interface Person {
 
 const dataFilePath = "/src/utils/playerData.ts";
 
-const newData = [
-  ...players,
-  {
-    id: 10,
-    name: "New Player",
-    benched: false,
-    present: true,
-  },
-];
+// const newData = [
+//   ...players,
+//   {
+//     id: 10,
+//     name: "New Player",
+//     benched: false,
+//     present: true,
+//   },
+// ];
 
-const fileContent = `export const players = ${JSON.stringify(
-  newData,
-  null,
-  2
-)};\n`;
+// const fileContent = `export const players = ${JSON.stringify(
+//   newData,
+//   null,
+//   2
+// )};\n`;
 
 export function Settings() {
   const [selectedOption, setSelectedOption] = useState("number of courts");
@@ -61,7 +61,7 @@ export function Settings() {
       const newPlayer: Person = {
         id: newPlayerId,
         name: playerName,
-        benched: false, // You can set these to default values if needed
+        benched: false, // set these to default values if needed
         present: true, // Initialize the new player as present
       };
 
@@ -85,7 +85,12 @@ export function Settings() {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ name: "Lorenzo", email: "lo@lorenzozar.com" }),
+      body: JSON.stringify({
+        id: "11",
+        name: "Lorenzo",
+        benched: true,
+        present: true,
+      }),
     });
     const data = await response.json();
     console.log(data);
