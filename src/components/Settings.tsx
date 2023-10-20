@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { players } from "~/utils/playerData";
+// import { players } from "~/utils/playerData";
+import playerData from "json/playerData.json";
 import { useRouter } from "next/router";
 
 interface Person {
@@ -34,7 +35,7 @@ export function Settings() {
 
   useEffect(() => {
     // Initialize the currentlyPresent state with the data from playerData.ts
-    setPresent(players);
+    setPresent(playerData);
   }, []);
 
   const handleCheckboxChange = (id: number) => {
@@ -61,7 +62,7 @@ export function Settings() {
       const newPlayer: Person = {
         id: newPlayerId,
         name: playerName,
-        benched: false, // set these to default values if needed
+        benched: true, // set these to default values if needed
         present: true, // Initialize the new player as present
       };
 
@@ -85,15 +86,10 @@ export function Settings() {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        id: "11",
-        name: "Lorenzo",
-        benched: true,
-        present: true,
-      }),
+      body: JSON.stringify([...currentlyPresent]),
     });
     const data = await response.json();
-    console.log(data);
+    console.log(currentlyPresent);
   };
 
   //-----------------
@@ -117,6 +113,7 @@ export function Settings() {
           onSubmit={(e) => {
             e.preventDefault(); // Prevent the default form submission behavior
             handleClick();
+            console.log(currentlyPresent);
           }}
         >
           <label htmlFor="addPlayer">Add Player:</label>
@@ -148,6 +145,10 @@ export function Settings() {
               </li>
             ))}
           </ul>
+        </div>
+        <div>
+          <br></br>
+          <button onClick={saveData}>Update File</button>
         </div>
         <div>
           <br></br>

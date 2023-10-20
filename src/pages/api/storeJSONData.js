@@ -18,19 +18,15 @@ export default async function handler(req, res) {
       const objectData = JSON.parse(jsonData);
 
       // Get the data from the request body
-      const { id, name, benched, present } = req.body;
+      // const { id, name, benched, present } = req.body;
 
       // Add the new data to the object
-      const newData = {
-        id,
-        name,
-        benched,
-        present,
-      };
+      const newData = req.body;
+      console.log("in the API:" + newData);
       objectData.push(newData);
 
       // Convert the object back to a JSON string
-      const updatedData = JSON.stringify(objectData);
+      const updatedData = JSON.stringify(newData);
 
       // Write the updated data to the JSON file
       await fsPromises.writeFile(dataFilePath, updatedData);
