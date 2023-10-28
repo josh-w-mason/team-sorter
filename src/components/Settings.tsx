@@ -72,10 +72,16 @@ export function Settings() {
   };
 
   const handleLetsGoClick = async () => {
-    // Perform your functions here
+    try {
+      // Perform your functions here
+      await saveData();
 
-    // Redirect to a different page using the router
-    await router.push("/");
+      // Redirect to a different page using the router
+      await router.push("/");
+    } catch (error) {
+      // Handle errors if needed
+      console.error("Error with saving data:", error);
+    }
   };
 
   ///---------try using Next API and fs to write to JSON file:
@@ -146,10 +152,10 @@ export function Settings() {
             ))}
           </ul>
         </div>
-        <div>
+        {/* <div>
           <br></br>
           <button onClick={saveData}>Update File</button>
-        </div>
+        </div> */}
         <div>
           <br></br>
           <button onClick={handleLetsGoClick}>Lets Go!</button>

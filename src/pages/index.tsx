@@ -33,7 +33,7 @@ export default function Home({ localData }: LocalData) {
   const handleDataGenerated = (data: number[] | undefined) => {
     setPlayerData(data);
   };
-
+  console.log(localData);
   //testing Next API stuff
 
   type JSONData = Person[];
@@ -44,22 +44,24 @@ export default function Home({ localData }: LocalData) {
     console.log(data);
   };
 
-  const saveData = async (): Promise<void> => {
-    const response = await fetch("/api/storeJSONData", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        id: 11,
-        name: "Lorenzo",
-        benched: true,
-        present: true,
-      }),
-    });
-    const data = (await response.json()) as JSONData;
-    console.log(data);
-  };
+  const benchedPlayers = localData.filter((item) => item.benched === true);
+
+  // const saveData = async (): Promise<void> => {
+  //   const response = await fetch("/api/storeJSONData", {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //     body: JSON.stringify({
+  //       id: 11,
+  //       name: "Lorenzo",
+  //       benched: true,
+  //       present: true,
+  //     }),
+  //   });
+  //   const data = (await response.json()) as JSONData;
+  //   console.log(data);
+  // };
 
   //--------------------------------------
 
@@ -80,7 +82,7 @@ export default function Home({ localData }: LocalData) {
         <div className="container flex flex-col items-center justify-center gap-12 px-4 py-16 ">
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-8"></div>
           <ul>
-            {localData.map(({ id, name }) => (
+            {benchedPlayers.map(({ id, name }) => (
               <li key={id}>
                 <b>
                   {id} - {name}
@@ -93,7 +95,7 @@ export default function Home({ localData }: LocalData) {
 
           <div className="flex flex-col items-center gap-2">
             <button onClick={fetchData}>Fetch</button>
-            <button onClick={saveData}>Save</button>
+            {/* <button onClick={saveData}>Save</button> */}
           </div>
         </div>
       </main>
